@@ -8238,6 +8238,7 @@ L:	linux-mips@linux-mips.org
 S:	Maintained
 F:	arch/mips/goldfish/
 F:	arch/mips/include/asm/mach-goldfish/
+F:	arch/mips/boot/dts/goldfish/
 
 MIROSOUND PCM20 FM RADIO RECEIVER DRIVER
 M:	Hans Verkuil <hverkuil@xs4all.nl>
