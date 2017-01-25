@@ -158,7 +158,8 @@ SECTIONS
 	}
 #endif
 
-#ifdef CONFIG_MIPS_RAW_APPENDED_DTB
+#if defined(CONFIG_MIPS_RAW_APPENDED_DTB) &&  \
+	!defined(CONFIG_MIPS_DTB_ALTERNATIVE_POSITION) 
 	__appended_dtb = .;
 	/* leave space for appended DTB */
 	. += 0x100000;
@@ -185,6 +186,13 @@ SECTIONS
 	BSS_SECTION(0, 0x10000, 0)
 
 	_end = . ;
+
+#if defined(CONFIG_MIPS_RAW_APPENDED_DTB) &&  \
+	defined(CONFIG_MIPS_DTB_ALTERNATIVE_POSITION)
+	__appended_dtb = .;
+	/* leave space for appended DTB */
+	. += 0x100000;
+#endif
 
 	/* These mark the ABI of the kernel for debuggers.  */
 	.mdebug.abi32 : {

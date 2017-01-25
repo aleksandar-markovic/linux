@@ -2936,6 +2936,15 @@ choice
 		  look like a DTB header after a reboot if no actual DTB is appended
 		  to vmlinux.bin.  Do not leave this option active in a production kernel
 		  if you don't intend to always append a DTB.
+
+	config MIPS_DTB_ALTERNATIVE_POSITION
+		bool "DTB alternative position"
+		default n
+		depends on MIPS_RAW_APPENDED_DTB
+		help
+		  Set this option for systems that expect DTB to be located right after
+		  the area where the kernel is loaded in RAM (kernel high address).
+
 endchoice
 
 choice
