@@ -72,10 +72,12 @@ static inline int ieee754_class_nan(int xc)
 			vc = IEEE754_CLASS_SNAN;			\
 	} else if (ve == SP_EMIN-1+SP_EBIAS) {				\
 		if (vm) {						\
-			ve = SP_EMIN;					\
 			vc = IEEE754_CLASS_DNORM;			\
-		} else							\
+		} else {						\
 			vc = IEEE754_CLASS_ZERO;			\
+		}							\
+		ve = SP_EMIN-1;						\
+		vm |= SP_HIDDEN_BIT;					\
 	} else {							\
 		ve -= SP_EBIAS;						\
 		vm |= SP_HIDDEN_BIT;					\
@@ -110,10 +112,12 @@ static inline int ieee754_class_nan(int xc)
 			vc = IEEE754_CLASS_SNAN;			\
 	} else if (ve == DP_EMIN-1+DP_EBIAS) {				\
 		if (vm) {						\
-			ve = DP_EMIN;					\
 			vc = IEEE754_CLASS_DNORM;			\
-		} else							\
+		} else {						\
 			vc = IEEE754_CLASS_ZERO;			\
+		}							\
+		ve = DP_EMIN-1;						\
+		vm |= DP_HIDDEN_BIT;					\
 	} else {							\
 		ve -= DP_EBIAS;						\
 		vm |= DP_HIDDEN_BIT;					\
@@ -129,8 +133,8 @@ static inline int ieee754_class_nan(int xc)
 		if (ieee754_csr.nod) {					\
 			ieee754_setcx(IEEE754_INEXACT);			\
 			vc = IEEE754_CLASS_ZERO;			\
-			ve = DP_EMIN-1+DP_EBIAS;			\
-			vm = 0;						\
+			ve = DP_EMIN-1;					\
+			vm = DP_HIDDEN_BIT;				\
 			v = ieee754dp_zero(vs);				\
 		}							\
 	}
@@ -140,8 +144,8 @@ static inline int ieee754_class_nan(int xc)
 		if (ieee754_csr.nod) {					\
 			ieee754_setcx(IEEE754_INEXACT);			\
 			vc = IEEE754_CLASS_ZERO;			\
-			ve = SP_EMIN-1+SP_EBIAS;			\
-			vm = 0;						\
+			ve = SP_EMIN-1;					\
+			vm = SP_HIDDEN_BIT;				\
 			v = ieee754sp_zero(vs);				\
 		}							\
 	}
